@@ -11,7 +11,8 @@ class Board
     @test = "testing variables"
     create_array_of_raw_mines
     rows_to_arrays_of_individual_boxes
-    checking_boxes
+    extracting_mine_location
+    # assigning_mine_proximity
   end
 
   def self.create_array_of_raw_mines
@@ -34,7 +35,7 @@ class Board
     # binding.pry
   end
 
-  def self.checking_boxes
+  def self.extracting_mine_location
     out = @out
     mine_counter = 0
     line_counter = 0
@@ -51,9 +52,8 @@ class Board
       end
       line_counter += 1
     end
-    number_of_mines #array with number and location of mines
-                    #[[0, [1, 4]], [1, [2]], [2, [4]], [3, [3, 5]], [4, [1, 4]], [5, []]]
-    binding.pry
+    assigning_mine_proximity(number_of_mines) #array with number and location of mines
+              #[[0, [1, 4]], [1, [2]], [2, [4]], [3, [3, 5]], [4, [1, 4]], [5, []]]
   end
 
   def self.calculate_number_of_mines(row, index)
@@ -61,6 +61,23 @@ class Board
     mine_position = row.each_with_index.select { |num, index| num == "*" }.map { |pair| pair[1] }
   end
 
+  def self.assigning_mine_proximity(number_of_mines)
+    number_of_mines.each_with_index do |line, index|
+      binding.pry
+      @out[index][line[1][0]]
+      @out[index][line[1][1]]
+      #self line adding
+      # @out[index][line[1][0]-1] = 1
+      # @out[index][line[1][0]+1] = 1
+      #line under adding
+      # @out[index + 1][line[1][0]] = 1
+      # @out[index + 1][line[1][0]-1] = 1
+      # @out[index + 1][line[1][0]+1] = 1
+
+      # handle with errors, raise and continue
+
+    end
+  end
 end
 
 # PHASE 1
